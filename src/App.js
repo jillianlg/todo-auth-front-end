@@ -18,7 +18,7 @@ export default class App extends Component {
         <Router>
           <ul>
             <Link to="/login"><div>Log In</div></Link>
-            <Link to="/signup"><div>Log In</div></Link>
+            <Link to="/signup"><div>Sign Up</div></Link>
           </ul>
           <Switch>
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />
