@@ -40,9 +40,13 @@ export default class Signup extends Component {
                         onChange={(e) => this.setState({ password: e.target.value })}
                         value={this.state.password} type="password"/>
                     </label>
-                    <button>
-                        Sign up!
-                    </button>
+                    {
+                        this.state.loading 
+                        ? 'LOADING....'
+                        : <button>
+                            Sign up!
+                        </button>
+                    }
                 </form>
             </div>
         )
