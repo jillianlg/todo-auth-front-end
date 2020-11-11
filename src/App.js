@@ -9,6 +9,7 @@ import './App.css';	import './App.css';
 import Login from './Login.js'
 import Signup from './SignUp.js'
 import Home from './Home.js'
+import Todos from './Todos.js'
 
 
 export default class App extends Component {
@@ -24,6 +25,7 @@ export default class App extends Component {
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />
             <Route exact path='/login' render={(routerProps)=> <Login {...routerProps} />} />
             <Route exact path='/signup' render={(routerProps)=> <Signup {...routerProps} />} />
+            <Route exact path='/todos' render={(routerProps)=> <Todos {...routerProps} />} />
           </Switch>
         </Router>
       </div>
