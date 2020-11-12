@@ -33,16 +33,16 @@ export default class Todos extends Component {
         .set('Authorization', this.props.token)
 
         await this.fetchTodos();
-      }
+    }
 
-      handleCheckboxClick = async(id) => {
+    handleCheckboxClick = async(id) => {
         this.setState({ loading:true })
         await request.put(`https://cryptic-shore-29263.herokuapp.com/api/todos/${id}`)
         .set('Authorization', this.props.token)
 
         await this.fetchTodos();
 
-      }
+    }
 
 
     render() {
@@ -62,10 +62,6 @@ export default class Todos extends Component {
                             Add
                         </button>
                 </form>
-                {/* figure out a way to map through the todos state (from the GET route) to generate indiviual checkboxes for each to do item*/}
-            {/* <div>
-            <CheckBoxes { this.state.tasks } />
-            </div> */}
 
                 {this.state.loading 
                         ? 'LOADING....'
