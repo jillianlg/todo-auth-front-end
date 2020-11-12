@@ -10,6 +10,7 @@ import Login from './Login.js'
 import Signup from './SignUp.js'
 import Home from './Home.js'
 import Todos from './Todos.js'
+import PrivateRoute from './PrivateRoute.js';
 
 
 export default class App extends Component {
@@ -41,7 +42,7 @@ export default class App extends Component {
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />
             <Route exact path='/login' render={(routerProps)=> <Login {...routerProps} />} />
             <Route exact path='/signup' render={(routerProps)=> <Signup {...routerProps} changeTokenAndUsername= {this.changeTokenAndUsername}/>} />
-            <Route exact path='/todos' render={(routerProps)=> <Todos {...routerProps} token={this.state.token}/>} />
+            <PrivateRoute token={this.state.token} exact path='/todos' render={(routerProps)=> <Todos {...routerProps} token={this.state.token} />} />
           </Switch>
         </Router>
       </div>
