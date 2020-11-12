@@ -13,19 +13,35 @@ import Todos from './Todos.js'
 
 
 export default class App extends Component {
+  state = {
+    username: localStorage.getItem('USERNAME') || '',
+    token: localStorage.getItem('TOKEN') || '',
+  }
+
+  changeTokenAndUsername = (email, token) => {
+    localStorage.setItem('TOKEN', token);
+    localStorage.setItem('USERNAME', email);
+
+    this.setState({
+      username: email,
+      token: token
+    })
+  }
+
   render() {
     return (
       <div>
         <Router>
           <ul>
+          { localStorage.getItem('USERNAME')}
             <Link to="/login"><div>Log In</div></Link>
             <Link to="/signup"><div>Sign Up</div></Link>
           </ul>
           <Switch>
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />
             <Route exact path='/login' render={(routerProps)=> <Login {...routerProps} />} />
-            <Route exact path='/signup' render={(routerProps)=> <Signup {...routerProps} />} />
-            <Route exact path='/todos' render={(routerProps)=> <Todos {...routerProps} />} />
+            <Route exact path='/signup' render={(routerProps)=> <Signup {...routerProps} changeTokenAndUsername= {this.changeTokenAndUsername}/>} />
+            <Route exact path='/todos' render={(routerProps)=> <Todos {...routerProps} token={this.state.token}/>} />
           </Switch>
         </Router>
       </div>

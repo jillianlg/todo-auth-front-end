@@ -22,7 +22,12 @@ export default class Signup extends Component {
 
         console.log(user.body, 'sending you to todos');
         this.setState({ loading: false })
-    }
+
+        this.props.changeTokenAndUsername(user.body.email, user.body.token);
+
+        this.props.history.push('/todos');
+    }	    
+
 
     render() {
         return (
