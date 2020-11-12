@@ -6,21 +6,25 @@ export default class Todos extends Component {
         todos: [],
         task: '',
         completed: false,
+        loading: false,
     }
 
     componentDidMount = async () => {
         await this.fetchTodos()
     }
     fetchTodos =async() => {
+        this.setState({ loading:true })
         const response = await request.get('https://cryptic-shore-29263.herokuapp.com/api/todos')
         .set('Authorization', this.props.token)
 
+        this.setState({ loading: false })
         this.setState({ todos: response.body })
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
 
+        this.setState({ loading:true })
         await request.post('https://cryptic-shore-29263.herokuapp.com/api/todos')
         .send({
             task: this.state.task,
@@ -31,6 +35,14 @@ export default class Todos extends Component {
         await this.fetchTodos();
       }
 
+      handleCheckboxClick = async(id) => {
+        this.setState({ loading:true })
+        await request.put(`https://cryptic-shore-29263.herokuapp.com/api/todos/${id}`)
+        .set('Authorization', this.props.token)
+
+        await this.fetchTodos();
+
+      }
 
 
     render() {
@@ -51,20 +63,24 @@ export default class Todos extends Component {
                         </button>
                 </form>
                 {/* figure out a way to map through the todos state (from the GET route) to generate indiviual checkboxes for each to do item*/}
-                {/* <div>
-                        Completed:
-                        <radio 
+            {/* <div>
+            <CheckBoxes { this.state.tasks } />
+            </div> */}
+
+                {this.state.loading 
+                        ? 'LOADING....'
+                        : 
+                    Boolean(this.state.todos.length) && this.state.todos.map(todo => ( 
+
+                        <div style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
+                            Task: {todo.task}
+                            <input
                             type="checkbox"
-                            value={this.state.completed} 
-                            onChange={(e) => this.setState({ completed: e.target.value })}
-                        />
-                    </div> */}
-                {
-                    Boolean(this.state.todos.length) && this.state.todos.map
-                    (todo => <div>
-                        Task: {todo.task};
-                        Completed: {todo.completed}
-                            </div>
+                            checked={todo.completed}
+                            onClick={() => this.handleCheckboxClick(todo.id)}
+                            />
+                        </div>
+                        )
                     )
                 }
             </div>
