@@ -40,7 +40,7 @@ export default class App extends Component {
           </ul>
           <Switch>
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />
-            <Route exact path='/login' render={(routerProps)=> <Login {...routerProps} />} />
+            <Route exact path='/login' render={(routerProps)=> <Login {...routerProps} changeTokenAndUsername= {this.changeTokenAndUsername}/>} />
             <Route exact path='/signup' render={(routerProps)=> <Signup {...routerProps} changeTokenAndUsername= {this.changeTokenAndUsername}/>} />
             <PrivateRoute token={this.state.token} exact path='/todos' render={(routerProps)=> <Todos {...routerProps} token={this.state.token} />} />
           </Switch>
