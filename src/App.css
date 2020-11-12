@@ -17,16 +17,18 @@ h3 {
   flex-direction: row;
   justify-content: center;
 }
+
 label {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   padding: 5px;
 }
 
-button {
+form {
   display: flex;
-  flex-direction: column;
-  justify-content: right;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

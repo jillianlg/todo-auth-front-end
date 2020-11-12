@@ -32,6 +32,7 @@ export default class Signup extends Component {
     render() {
         return (
             <div>
+                <h3>Sign up for an account:</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Email:
@@ -49,7 +50,7 @@ export default class Signup extends Component {
                         this.state.loading 
                         ? 'LOADING....'
                         : <button>
-                            Sign up!
+                            Sign up
                         </button>
                     }
                 </form>

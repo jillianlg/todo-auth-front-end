@@ -29,14 +29,32 @@ export default class App extends Component {
     })
   }
 
+  logOut = () => {
+    localStorage.setItem('TOKEN', '');
+    localStorage.setItem('USERNAME', '');
+
+    this.setState({
+      username: '',
+      token: ''
+    })
+
+  }
+
   render() {
+    console.log('hello');
     return (
       <div>
         <Router>
           <ul>
-          { localStorage.getItem('USERNAME')}
-            <Link to="/login"><div>Log In</div></Link>
-            <Link to="/signup"><div>Sign Up</div></Link>
+            { this.state.username
+            ? <div>
+            {this.state.username}
+            <button onClick={this.logOut}>Log out</button>
+          </div>
+        : <>
+              <Link to="/login"><div>Log In</div></Link>
+              <Link to="/signup"><div>Sign Up</div></Link>
+              </>}
           </ul>
           <Switch>
             <Route exact path='/' render={(routerProps)=> <Home {...routerProps} />} />

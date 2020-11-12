@@ -7,7 +7,7 @@ export default class Todos extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await request.get('https://cryptic-shore-29263.herokuapp.com/api/plants')
+        const response = await request.get('https://cryptic-shore-29263.herokuapp.com/api/todos')
         .set('Authorization', this.props.token)
 
         this.setState({ todos: response.body })
